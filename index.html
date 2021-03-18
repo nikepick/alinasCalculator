@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Alina's Calcultor</title>
+    <script>
+      var number1, number2, operator, result;
+
+      function makeDumbJokes() {
+        //WE ARE GOING TO MAKE A DUMB JOKE FUNCTION HERE
+
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+          if (this.readyState == 4 && this.status == 200) {
+            var response = JSON.parse(this.responseText);
+            var random_number = Math.floor(Math.random() * response.length);
+            var specific_response = response[random_number];
+            document.getElementById("input1").value = specific_response.line;
+            document.getElementById("operation").value =
+              specific_response.emoji;
+            document.getElementById(
+              "input2"
+            ).value = `BTW your solution for ${number1} ${operator} ${number2} is`;
+          }
+        };
+        xhttp.open("GET", "https://nikepick.github.io/jokesAttempt/jokes.json");
+        xhttp.send();
+      }
+
+      function getAlinasQuery() {
+        //WE ARE GOING TO MAKE A DUMB JOKE FUNCTION HERE
+
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+          if (this.readyState == 4 && this.status == 200) {
+            var response = JSON.parse(this.responseText);
+            var random_number = Math.floor(Math.random() * response.length);
+            var specific_response = response[random_number];
+            document.getElementById("input1").value = specific_response.query;
+            document.getElementById("operation").value =
+              specific_response.response;
+          }
+        };
+        xhttp.open("GET", "https://nikepick.github.io/alinasQuery/query.json");
+        xhttp.send();
+      }
+
+      function calculate_plz() {
+        number1 = document.getElementById("input1").value;
+        operator = document.getElementById("operation").value;
+        number2 = document.getElementById("input2").value;
+        number1 = parseInt(number1);
+        number2 = parseInt(number2);
+
+        if (operator === "+") {
+          result = number1 + number2;
+        } else if (operator === "-") {
+          result = number1 - number2;
+        } else if (operator === "x") {
+          result = number1 * number2;
+        } else if (operator === "/") {
+          result = number1 / number2;
+        } else {
+          result = "WTF did you put in operator";
+        }
+        makeDumbJokes();
+        document.getElementById("result").value = result;
+      }
+
+      function reset_plz() {
+        document.getElementById("input1").value = "";
+        document.getElementById("operation").value = "";
+        document.getElementById("input2").value = "";
+        document.getElementById("result").value = "";
+      }
+    </script>
+    <style>
+      input {
+        width: 500px;
+        height: 50px;
+        border: none;
+        border-bottom: 1px solid rgb(51, 51, 51);
+      }
+      .buttonS {
+        border: none;
+        width: 50px;
+        height: 50px;
+        background-color: cornflowerblue;
+        border-radius: 60px;
+        color: white;
+      }
+
+      .buttonReset {
+        border: none;
+        width: 50px;
+        height: 50px;
+        background-color: rgb(255, 0, 0);
+        border-radius: 60px;
+        color: white;
+      }
+      .packet {
+        margin-left: 10%;
+        margin-top: 10%;
+      }
+
+      .alinasFancyButton {
+        height: 50px;
+        width: 500px;
+        text-align: center;
+        border: none;
+        background-color: rgb(39, 147, 151);
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="packet">
+      <input type="text" id="input1" placeholder="Enter 1st Number" />
+      <br /><br />
+      <input
+        type="text"
+        id="operation"
+        placeholder="Enter Operator (+,-,x,/)"
+      />
+      <br /><br />
+      <input type="text" id="input2" placeholder="Enter 2nd Number" />
+      <br /><br />
+      <input type="text" id="result" placeholder="Wait for it" disabled/>
+      <br /><br />
+      <button onclick="calculate_plz()" class="buttonS">=</button>
+      <button onclick="reset_plz()" class="buttonReset">x</button>
+      <br /><br />
+      <button onclick="getAlinasQuery()" class="alinasFancyButton">
+        ALINA'S QUERY BUTTON
+      </button>
+    </div>
+  </body>
+</html>
+
+
